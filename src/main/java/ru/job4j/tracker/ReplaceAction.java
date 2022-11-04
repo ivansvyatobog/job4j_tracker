@@ -9,7 +9,7 @@ public class ReplaceAction implements UserAction {
 
     @Override
     public String name() {
-        return "Edit Item";
+        return "Edit item";
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ReplaceAction implements UserAction {
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);
         if (tracker.replace(id, item)) {
-            out.println("Заявка изменена успешно.");
+            out.println("Item Edited");
         } else {
             out.println("Ошибка замены заявки.");
         }
