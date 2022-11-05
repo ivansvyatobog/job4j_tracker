@@ -1,9 +1,9 @@
 package ru.job4j.early;
 
 public class PasswordValidator {
+    private static final String[] INVALID_PASSWORDS = new String[] {"qwerty", "12345", "password", "admin", "user"};
 
     public static String validate(String password) {
-        String[] invalidPasswords = new String[] {"qwerty", "12345", "password", "admin", "user"};
         boolean isUpper = false;
         boolean isLower = false;
         boolean isDigit = false;
@@ -28,6 +28,9 @@ public class PasswordValidator {
             if (!Character.isDigit(c) && !Character.isLetter(c)) {
                 isSpecial = true;
             }
+            if (isLower && isUpper && isDigit && isSpecial) {
+                break;
+            }
         }
         if (!isUpper) {
             throw new IllegalArgumentException("Password should contain at least one uppercase letter");
@@ -41,7 +44,7 @@ public class PasswordValidator {
         if (!isSpecial) {
             throw new IllegalArgumentException("Password should contain at least one special symbol");
         }
-        for (String invalidPassword : invalidPasswords) {
+        for (String invalidPassword : INVALID_PASSWORDS) {
             if (password.toLowerCase().contains(invalidPassword)) {
                 throw new IllegalArgumentException(
                         "Password shouldn't contain substrings: qwerty, 12345, password, admin, user"
